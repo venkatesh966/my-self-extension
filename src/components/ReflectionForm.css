@@ -1,7 +1,6 @@
 .reflection-container {
     font-family: 'Poppins', sans-serif;
     width: 650px;
-    /* margin: 40px auto; */
     padding: 30px;
     border-radius: 15px;
     background: #f5f9f6;
@@ -18,32 +17,47 @@
   }
   
   h1 {
-    margin: 0;
     font-size: 26px;
     font-weight: 600;
+    margin: 0;
+    padding: 0;
   }
   
-  .overview-btn {
-    background: #43A047;
+  .nav-tabs {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .nav-btn {
+    background: transparent;
     color: white;
-    border: none;
+    border: 2px solid white;
     border-radius: 8px;
     padding: 12px 20px;
     cursor: pointer;
     font-size: 18px;
+    transition: all 0.3s ease;
   }
   
+  .nav-btn:hover,
+  .nav-btn.active {
+    background: white;
+    color: #388E3C;
+  }
+  
+  /* Form Labels and Inputs */
   .input-label {
     font-size: 18px;
     font-weight: 600;
-    color: #2E7D32;
+    color: black;
+    text-align: left;
     margin-bottom: 8px;
     display: block;
     margin-top: 8px;
   }
   
   textarea {
-    width: 95%;
+    width: 100%;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -51,7 +65,8 @@
     background: #f9f9f9;
     outline: none;
     transition: border-color 0.3s ease;
-    margin-bottom: 20px; /* Added spacing */
+    margin-bottom: 20px;
+    text-align: left;
   }
   
   textarea:focus {
@@ -61,7 +76,8 @@
   .satisfaction-toggle {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px; /* Added spacing */
+    text-align: left;
+    margin-bottom: 25px;
     font-size: 18px;
     font-weight: 600;
   }
@@ -92,7 +108,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
     outline: none;
-    margin-top: 15px; /* Added spacing */
+    margin-top: 15px;
   }
   
   .save-btn:hover {
@@ -105,6 +121,11 @@
     color: red;
     font-size: 16px;
     margin-top: -10px;
-    margin-bottom: 20px; /* Added spacing */
+    margin-bottom: 20px;
+  }
+  
+  .success-message {
+    font-size: 15px;
+    color: Green;
   }
   

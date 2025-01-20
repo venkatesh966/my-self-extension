@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import WeeklyOverview from './WeeklyOverview';
+import AiInsights from './aiinsights/AiInsights';
 import { v4 as uuidv4 } from 'uuid';
 import './ReflectionForm.css';
 
@@ -10,8 +11,9 @@ const ReflectionForm = () => {
   const [negatives, setNegatives] = useState('');
   const [satisfaction, setSatisfaction] = useState('');
   const [reflections, setReflections] = useState([]);
-  const [showOverview, setShowOverview] = useState(false);
+  const [activeTab, setActiveTab] = useState('Home');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     chrome.storage.local.get('reflections', (result) => {
@@ -26,7 +28,7 @@ const ReflectionForm = () => {
     }
 
     const reflectionData = {
-      id: uuidv4(), // Generate unique ID
+      id: uuidv4(),
       date: new Date().toISOString().slice(0, 10),
       positives: positives.trim() ? positives.split(',') : [],
       negatives: negatives.trim() ? negatives.split(',') : [],
@@ -41,6 +43,9 @@ const ReflectionForm = () => {
       setNegatives('');
       setSatisfaction('');
       setErrorMessage('');
+      setSuccessMessage('Reflection saved successfully!');
+
+      setTimeout(() => setSuccessMessage(''), 3000);
     });
   };
 
@@ -48,13 +53,17 @@ const ReflectionForm = () => {
     <div className="reflection-container">
       <div className="header">
         <h1>My-Self Reflection</h1>
-        <button onClick={() => setShowOverview(!showOverview)} className="overview-btn">
-          {showOverview ? 'Back to Reflection' : 'Weekly Overview'}
-        </button>
+        <div className="nav-tabs">
+          <button className={`nav-btn ${activeTab === 'Home' ? 'active' : ''}`} onClick={() => setActiveTab('Home')}>Home</button>
+          <button className={`nav-btn ${activeTab === 'Overview' ? 'active' : ''}`} onClick={() => setActiveTab('Overview')}>Overview</button>
+          <button className={`nav-btn ${activeTab === 'AI Insights' ? 'active' : ''}`} onClick={() => setActiveTab('AI Insights')}>AI Insights</button>
+        </div>
       </div>
 
-      {!showOverview ? (
-        <div style={{marginTop: 30}}>
+      {activeTab === 'Home' && (
+        <div style={{ marginTop: 20 }}>
+          {successMessage && <p className="success-message">{successMessage}</p>}
+          
           <label className="input-label">Positive Things Happened Today:</label>
           <textarea
             placeholder="E.g., Helped a friend, completed a task, exercised..."
@@ -70,7 +79,7 @@ const ReflectionForm = () => {
           />
 
           <div className="satisfaction-toggle">
-            <label style={{marginBottom: 5}}>Are you satisfied today?</label>
+            <label>Are you satisfied today?</label>
             <select 
               className="custom-dropdown" 
               value={satisfaction} 
@@ -86,9 +95,10 @@ const ReflectionForm = () => {
 
           <button onClick={handleSubmit} className="save-btn">Save Reflection</button>
         </div>
-      ) : (
-        <WeeklyOverview reflections={reflections} setReflections={setReflections} />
       )}
+
+      {activeTab === 'Overview' && <WeeklyOverview reflections={reflections} setReflections={setReflections} />}
+      {activeTab === 'AI Insights' && <AiInsights reflections={reflections} />}
     </div>
   );
 };

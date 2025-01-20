@@ -1,71 +1,95 @@
 .weekly-overview {
-    padding: 25px;
+    padding: 20px;
     border-radius: 12px;
     background: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 650px;
+    margin: auto;
   }
   
-  h2 {
-    font-size: 22px;
-    color: #388E3C;
-    text-align: center;
-    margin-bottom: 20px;
+  .overview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
-  .reflection-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
+  .search-box {
+    padding: 8px;
+    border: 1px solid #388E3C;
+    border-radius: 5px;
+    font-size: 14px;
   }
   
-  .reflection-table th, .reflection-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
+  .reflection-list {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #388E3C;
+    border-radius: 10px;
+    overflow: hidden;
   }
   
-  .reflection-table th {
-    background-color: #388E3C;
-    color: white;
-    font-weight: bold;
+  .reflection-header, .reflection-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 12px 10px;
   }
   
-  .reflection-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+  .column {
+    flex: 1;
+    padding: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   
-  .reflection-table tr:hover {
-    background-color: #e8f5e9;
+  .action {
+    display: flex;
+    gap: 10px;
   }
   
-  .delete-btn {
-    padding: 8px 15px;
-    background-color: #d32f2f;
-    color: white;
-    border: none;
+  .edit-btn, .delete-btn {
+    padding: 8px 10px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
   }
   
-  .delete-btn:hover {
-    background-color: #b71c1c;
+  .edit-btn { background: #FFA000; color: white; }
+  .delete-btn { background: #d32f2f; color: white; }
+  
+  /* Edit popup styling */
+  .edit-popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-  .download-btn {
-    width: 100%;
-    padding: 16px;
-    background: #388E3C;
-    color: white;
-    border: none;
+  .edit-popup-content {
+    background: #fff;
+    padding: 20px;
     border-radius: 10px;
-    font-size: 20px;
-    margin-top: 20px;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .download-btn {
+    padding: 5px;
+    background: transparent;
+    color: #388E3C;
+    border: 2px solid #388E3C;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .download-btn:hover {
-    background: #2E7D32;
+    background: #388E3C;
+    color: white;
   }
   
