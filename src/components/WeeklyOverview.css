@@ -1,0 +1,71 @@
+.weekly-overview {
+    padding: 25px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  h2 {
+    font-size: 22px;
+    color: #388E3C;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .reflection-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  
+  .reflection-table th, .reflection-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .reflection-table th {
+    background-color: #388E3C;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .reflection-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .reflection-table tr:hover {
+    background-color: #e8f5e9;
+  }
+  
+  .delete-btn {
+    padding: 8px 15px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-btn:hover {
+    background-color: #b71c1c;
+  }
+  
+  .download-btn {
+    width: 100%;
+    padding: 16px;
+    background: #388E3C;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  
+  .download-btn:hover {
+    background: #2E7D32;
+  }
+  

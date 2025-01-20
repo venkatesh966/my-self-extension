@@ -1,0 +1,110 @@
+.reflection-container {
+    font-family: 'Poppins', sans-serif;
+    width: 650px;
+    /* margin: 40px auto; */
+    padding: 30px;
+    border-radius: 15px;
+    background: #f5f9f6;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #388E3C, #66BB6A);
+    padding: 15px;
+    border-radius: 12px;
+    color: white;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  
+  .overview-btn {
+    background: #43A047;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .input-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2E7D32;
+    margin-bottom: 8px;
+    display: block;
+    margin-top: 8px;
+  }
+  
+  textarea {
+    width: 95%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    background: #f9f9f9;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-bottom: 20px; /* Added spacing */
+  }
+  
+  textarea:focus {
+    border-color: #1E88E5;
+  }
+  
+  .satisfaction-toggle {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px; /* Added spacing */
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .satisfaction-toggle select {
+    padding: 12px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    background: #fafafa;
+    transition: border-color 0.3s ease;
+  }
+  
+  .satisfaction-toggle select:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .save-btn {
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    color: #388E3C;
+    border: 2px solid #388E3C;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    outline: none;
+    margin-top: 15px; /* Added spacing */
+  }
+  
+  .save-btn:hover {
+    background: #388E3C;
+    color: white;
+    transform: translateY(-3px);
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 16px;
+    margin-top: -10px;
+    margin-bottom: 20px; /* Added spacing */
+  }
+  
