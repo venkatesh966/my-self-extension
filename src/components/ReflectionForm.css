@@ -1,131 +1,178 @@
+/* reflection-container for theme management */
 .reflection-container {
-    font-family: 'Poppins', sans-serif;
-    width: 650px;
-    padding: 30px;
-    border-radius: 15px;
-    background: #f5f9f6;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to right, #388E3C, #66BB6A);
-    padding: 15px;
-    border-radius: 12px;
-    color: white;
-  }
-  
-  h1 {
-    font-size: 26px;
-    font-weight: 600;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav-tabs {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .nav-btn {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    border-radius: 8px;
-    padding: 12px 20px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: all 0.3s ease;
-  }
-  
-  .nav-btn:hover,
-  .nav-btn.active {
-    background: white;
-    color: #388E3C;
-  }
-  
-  /* Form Labels and Inputs */
-  .input-label {
-    font-size: 18px;
-    font-weight: 600;
-    color: black;
-    text-align: left;
-    margin-bottom: 8px;
-    display: block;
-    margin-top: 8px;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 16px;
-    background: #f9f9f9;
-    outline: none;
-    transition: border-color 0.3s ease;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  textarea:focus {
-    border-color: #1E88E5;
-  }
-  
-  .satisfaction-toggle {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-bottom: 25px;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  .satisfaction-toggle select {
-    padding: 12px;
-    font-size: 18px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    outline: none;
-    background: #fafafa;
-    transition: border-color 0.3s ease;
-  }
-  
-  .satisfaction-toggle select:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .save-btn {
-    width: 100%;
-    padding: 16px;
-    background: transparent;
-    color: #388E3C;
-    border: 2px solid #388E3C;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    outline: none;
-    margin-top: 15px;
-  }
-  
-  .save-btn:hover {
-    background: #388E3C;
-    color: white;
-    transform: translateY(-3px);
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 16px;
-    margin-top: -10px;
-    margin-bottom: 20px;
-  }
-  
-  .success-message {
-    font-size: 15px;
-    color: Green;
-  }
-  
+  font-family: 'Poppins', sans-serif;
+  width: 650px;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: #f5f9f6;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.9;
+  /* Default background for theme1 */
+  background-image: url('./images/img2.jpg');
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  padding: 15px;
+  border-radius: 12px;
+  color: cornsilk;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation tabs */
+.nav-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  background: transparent;
+  color: cornsilk;
+  border: 2px solid cornsilk;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  background: cornsilk;
+  color: #388E3C;
+}
+
+/* Theme selection button styling */
+.theme-selection {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.theme-btn {
+  background: #388E3C;
+  color: cornsilk;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-btn:hover {
+  background: #66BB6A;
+}
+
+/* Form Labels and Inputs */
+.input-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: cornsilk;
+  text-align: left;
+  margin-bottom: 8px;
+  display: block;
+  margin-top: 8px;
+  background-color: transparent;
+}
+
+textarea {
+  width: 95%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  background: transparent;
+  color: cornsilk;  /* Ensures the text typed is cornsilk */
+  outline: none;
+  transition: border-color 0.3s ease;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+textarea:focus {
+  border-color: #1E88E5;
+}
+
+/* Placeholder color for textareas */
+textarea::placeholder {
+  color: #d3d3d3; /* Light gray for placeholder text */
+}
+
+/* Satisfaction toggle */
+.satisfaction-toggle {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 25px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.satisfaction-toggle select {
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  background: transparent;
+  color: cornsilk; /* Ensures the text typed in the select dropdown is cornsilk */
+  transition: border-color 0.3s ease;
+}
+
+/* Simulate placeholder color for select elements */
+.satisfaction-toggle select option:first-child {
+  color: #d3d3d3; /* Light gray for the first option */
+}
+
+/* Add a custom background color for first option to simulate placeholder */
+.satisfaction-toggle select option:first-child:disabled {
+  color: #d3d3d3; /* Light gray */
+  background-color: transparent;
+}
+
+/* Save button */
+.save-btn {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  color: cornsilk;
+  border: 2px solid cornsilk;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  outline: none;
+  margin-top: 15px;
+}
+
+.save-btn:hover {
+  background: #084202;
+  color: cornsilk;
+  transform: translateY(-3px);
+}
+
+/* Error and Success messages */
+.error-message {
+  color: red;
+  font-size: 16px;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.success-message {
+  font-size: 15px;
+  color: Green;
+}

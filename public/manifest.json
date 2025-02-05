@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "My-Self",
+  "name": "My-Self Reflection",
   "version": "1.0",
   "description": "Daily reflection tracking",
   "permissions": ["storage"],
@@ -11,6 +11,5 @@
       "48": "logo192.png",
       "128": "logo192.png"
     }
-  },
-  "host_permissions": ["*://*/*"]
+  }
 }

@@ -105,7 +105,7 @@ const AiInsights = () => {
   return (
     <div className="ai-insights-container">
       {/* <h2>AI Insights</h2> */}
-      <p className="coming-soon-message">Coming Soon...</p>
+      <p style={{fontSize: 16}} className="coming-soon-message">Coming Soon...</p>
     </div>
   );
 };

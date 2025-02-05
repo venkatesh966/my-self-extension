@@ -68,7 +68,7 @@ const WeeklyOverview = ({ reflections, setReflections }) => {
   return (
     <div className="weekly-overview">
       <div className="overview-header">
-        <h2>Overview</h2>
+        <h2 style={{color: 'cornsilk'}}>Overview</h2>
         <input
           type="text"
           className="search-box"
@@ -103,7 +103,7 @@ const WeeklyOverview = ({ reflections, setReflections }) => {
           ))}
         </div>
       ) : (
-        <p style={{ fontSize: 15 }}>No reflections available yet.</p>
+        <p style={{ fontSize: 15, color: 'cornsilk' }}>No reflections available yet.</p>
       )}
 
       {editingReflection && (

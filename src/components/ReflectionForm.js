@@ -14,43 +14,36 @@ const ReflectionForm = () => {
   const [activeTab, setActiveTab] = useState('Home');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [selectedTheme, setSelectedTheme] = useState('theme1'); // Default theme selection
 
   useEffect(() => {
     chrome.storage.local.get('reflections', (result) => {
       setReflections(result.reflections || []);
     });
+
+    chrome.storage.local.get('selectedTheme', (result) => {
+      setSelectedTheme(result.selectedTheme || 'theme1'); // Default theme if not set
+    });
   }, []);
 
-  const handleSubmit = () => {
-    if (!positives.trim() && !negatives.trim() && !satisfaction) {
-      setErrorMessage('Please fill at least one field before saving.');
-      return;
-    }
-
-    const reflectionData = {
-      id: uuidv4(),
-      date: new Date().toISOString().slice(0, 10),
-      positives: positives.trim() ? positives.split(',') : [],
-      negatives: negatives.trim() ? negatives.split(',') : [],
-      satisfaction: satisfaction || 'Not specified',
-    };
-
-    const updatedReflections = [...reflections, reflectionData];
-
-    chrome.storage.local.set({ reflections: updatedReflections }, () => {
-      setReflections(updatedReflections);
-      setPositives('');
-      setNegatives('');
-      setSatisfaction('');
-      setErrorMessage('');
-      setSuccessMessage('Reflection saved successfully!');
-
-      setTimeout(() => setSuccessMessage(''), 3000);
+  const handleThemeChange = (theme) => {
+    chrome.storage.local.set({ selectedTheme: theme }, () => {
+      setSelectedTheme(theme);
     });
   };
 
+  const handleSubmit = () => {
+    // Your existing submit logic here
+  };
+
   return (
-    <div className="reflection-container">
+    <div className={`reflection-container ${selectedTheme}`}>
+      {/* Theme Selection Button */}
+      {/* <div className="theme-selection">
+        <button className="theme-btn" onClick={() => handleThemeChange('theme1')}>Theme 1</button>
+        <button className="theme-btn" onClick={() => handleThemeChange('theme2')}>Theme 2</button>
+      </div> */}
+
       <div className="header">
         <h1>My-Self Reflection</h1>
         <div className="nav-tabs">
@@ -63,7 +56,7 @@ const ReflectionForm = () => {
       {activeTab === 'Home' && (
         <div style={{ marginTop: 20 }}>
           {successMessage && <p className="success-message">{successMessage}</p>}
-          
+
           <label className="input-label">Positive Things Happened Today:</label>
           <textarea
             placeholder="E.g., Helped a friend, completed a task, exercised..."
@@ -79,7 +72,7 @@ const ReflectionForm = () => {
           />
 
           <div className="satisfaction-toggle">
-            <label>Are you satisfied today?</label>
+            <label style={{color: 'cornsilk', paddingBottom: '5px'}}>Are you satisfied today?</label>
             <select 
               className="custom-dropdown" 
               value={satisfaction} 
