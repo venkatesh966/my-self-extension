@@ -1,66 +1,153 @@
+/* AI Insights Container */
 .ai-insights-container {
-    padding: 25px;
-    border-radius: 12px;
-    background: cornsilk;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 650px;
-    margin: auto;
-    text-align: center;
-    overflow-y: auto;
-    max-height: 80vh;
-    position: relative;
+  padding: 25px;
+  border-radius: 12px;
+  background: cornsilk;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 650px;
+  margin: auto;
+  text-align: center;
+  overflow-y: auto;
+  max-height: 80vh;
+  position: relative;
+}
+
+/* Header Title */
+h2 {
+  font-size: 26px;
+  color: #2E7D32;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Buttons: Fetch and Download Insights */
+.generate-btn, .fetch-insights-btn, .insights-download-btn {
+  padding: 12px 20px;
+  background: transparent;
+  border: 2px solid #388E3C;
+  color: #388E3C;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.generate-btn:hover, 
+.fetch-insights-btn:hover, 
+.insights-download-btn:hover {
+  background: #388E3C;
+  color: white;
+}
+
+.generate-btn:disabled, 
+.fetch-insights-btn:disabled, 
+.insights-download-btn:disabled {
+  background: #d3d3d3;
+  color: #777;
+  border: 2px solid #ccc;
+  cursor: not-allowed;
+}
+
+/* Error Messages */
+.error-message {
+  color: red;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  max-width: 600px;
+}
+
+/* Insights Display */
+.insights-display {
+  margin-top: 20px;
+  text-align: left;
+  font-size: 16px;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Personality Sections */
+.section {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Insights Summary */
+.insights-summary {
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Graph & Legend Section */
+.chart-legend-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* Pie Chart Container */
+.pie-chart-container {
+  width: 300px;
+  height: 250px;
+}
+
+/* Legend Container beside Pie Chart */
+.legend-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+/* Legend Items */
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* Legend Colors */
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .chart-legend-container {
+    flex-direction: column;
+    align-items: center;
   }
   
-  h2 {
-    font-size: 24px;
-    color: #2E7D32;
-    margin-bottom: 20px;
-  }
-  
-  .generate-btn {
-    padding: 12px 20px;
-    background: transparent;
-    border: 2px solid #388E3C;
-    color: #388E3C;
-    border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 20px;
-  }
-  
-  .generate-btn:hover {
-    background: #388E3C;
-    color: white;
-  }
-  
-  .generate-btn:disabled {
-    background: #d3d3d3;
-    color: #777;
-    border: 2px solid #ccc;
-    cursor: not-allowed;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 16px;
+  .legend-container {
+    margin-left: 0;
     margin-top: 10px;
-    margin-bottom: 20px;
     text-align: center;
-    max-width: 600px;
   }
   
-  .insights-display {
-    margin-top: 20px;
-    text-align: left;
-    font-size: 16px;
-    max-height: 50vh;
-    overflow-y: auto;
+  .legend-item {
+    justify-content: center;
   }
-  
-  ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    font-size: 16px;
-  }
-  
+}

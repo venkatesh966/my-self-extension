@@ -1,9 +1,23 @@
 /* global chrome */
 import React, { useState, useEffect } from 'react';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import './AiInsights.css';
 
+const FIXED_TRAITS = [
+  { name: 'Empathy', color: '#4CAF50' },
+  { name: 'Discipline', color: '#FF9800' },
+  { name: 'Kindness', color: '#3F51B5' },
+  { name: 'Creativity', color: '#009688' },
+  { name: 'Assertiveness', color: '#FFC107' },
+  { name: 'Procrastination', color: '#E91E63' },
+  { name: 'Laziness', color: '#D32F2F' },
+  { name: 'Anger', color: '#F44336' },
+  { name: 'Impatience', color: '#9C27B0' },
+  { name: 'Work-Life Balance', color: '#00BCD4' },
+];
+
 const AiInsights = () => {
-  const [insights, setInsights] = useState(null);
+  const [insights, setInsights] = useState({ traits: [], summary: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [clickCount, setClickCount] = useState(0);
@@ -27,7 +41,7 @@ const AiInsights = () => {
   };
 
   const fetchReflections = async () => {
-    if (clickCount >= 15) {
+    if (clickCount >= 300) {
       setError('Your free version is completed.');
       return;
     }
@@ -37,14 +51,12 @@ const AiInsights = () => {
 
     try {
       const reflections = await getReflections();
-
       if (!reflections.length) {
         setError('No data available to generate insights.');
         setLoading(false);
         return;
       }
 
-      // (Optional) Format data if needed for further processing.
       const formattedData = reflections.map(entry => ({
         date: entry.date,
         positives: entry.positives.join(', '),
@@ -53,10 +65,34 @@ const AiInsights = () => {
       }));
 
       const messages = [
-        { role: 'system', content: 'Analyze reflections and provide personality insights.' },
+        { role: 'system', content: 'Analyze reflections and provide personality traits with percentages that sum to 100% and a short summary.' },
         {
           role: 'user',
-          content: `Based on the following reflections, provide a brief personality analysis in 3 key strengths and 3 areas to improve in simple and human-like wording. Focus on qualities such as empathy, discipline, passion, and productivity.`,
+          content: `Here are the reflections of a user: ${JSON.stringify(formattedData)}
+            Map the user's personality to these fixed traits:
+            1. Empathy
+            2. Discipline
+            3. Kindness
+            4. Creativity
+            5. Assertiveness
+            6. Procrastination
+            7. Laziness
+            8. Anger
+            9. Impatience
+            10. Work-Life Balance
+            
+            Example response:
+            **Personality Breakdown:**
+            - Empathy: 25%
+            - Discipline: 20%
+            - Kindness: 15%
+            - Creativity: 10%
+            - Laziness: 10%
+            - Anger: 10%
+            - Impatience: 10%
+
+            **Summary:**
+            Provide a brief summary based on these mapped traits.`,
         },
       ];
 
@@ -65,13 +101,13 @@ const AiInsights = () => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer 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`,
-          'HTTP-Referer': '<YOUR_SITE_URL>', 
-          'X-Title': '<YOUR_SITE_NAME>',     
+          'HTTP-Referer': 'https://yourwebsite.com',
+          'X-Title': 'My-Self Chrome Extension',
         },
         body: JSON.stringify({
-          model: 'openai/gpt-4o', 
+          model: 'openai/gpt-4o',
           messages: messages,
-          max_tokens: 300,
+          max_tokens: 1000,
         }),
       });
 
@@ -80,8 +116,10 @@ const AiInsights = () => {
       }
 
       const data = await response.json();
-      setInsights(parseInsights(data.choices[0].message.content.trim()));
+      const assistantMessage = data.choices[0].message.content.trim();
+      const parsedData = parseTraits(assistantMessage);
 
+      setInsights(parsedData);
       const newCount = clickCount + 1;
       setClickCount(newCount);
       chrome.storage.sync.set({ insightsClickCount: newCount });
@@ -92,45 +130,76 @@ const AiInsights = () => {
     }
   };
 
-  const parseInsights = (insightsText) => {
-    const positivesMatch = insightsText.match(/Positives:\s*(-[\s\S]*?)Areas to Improve:/);
-    const improvementsMatch = insightsText.match(/Areas to Improve:\s*(-[\s\S]*)/);
+  const parseTraits = (text) => {
+    const traitsMatch = text.match(/\*\*Personality Breakdown:\*\*\s*\n([\s\S]*)/);
+    const summaryMatch = text.match(/\*\*Summary:\*\*\s*\n([\s\S]*)/);
 
-    const positives = positivesMatch ? positivesMatch[1].trim().split('- ').filter(Boolean) : [];
-    const improvements = improvementsMatch ? improvementsMatch[1].trim().split('- ').filter(Boolean) : [];
+    const traits = FIXED_TRAITS.map(trait => {
+      const match = traitsMatch ? traitsMatch[1].match(new RegExp(`- ${trait.name}: (\\d+)%`)) : null;
+      return { name: trait.name, value: match ? parseInt(match[1]) : 0, color: trait.color };
+    });
 
-    return {
-      positives: positives.map(item => item.trim()),
-      improvements: improvements.map(item => item.trim()),
-    };
+    const summary = summaryMatch ? summaryMatch[1].trim() : "No summary provided.";
+    return { traits, summary };
   };
 
   return (
     <div className="ai-insights-container">
-      <h2>AI Insights</h2>
-      <button onClick={fetchReflections} disabled={loading}>
+      <button onClick={fetchReflections} className="fetch-insights-btn" disabled={loading}>
         {loading ? 'Loading...' : 'Get AI Insights'}
       </button>
-      {error && <div className="error">{error}</div>}
-      {insights && (
+      {error && <div className="error-message">{error}</div>}
+      {insights.traits.length > 0 && (
         <div className="insights-display">
-          <h3>Personality Insights</h3>
-          <div className="insights-section">
-            <h4>Strengths:</h4>
-            <ul>
-              {insights.positives.map((item, index) => (
-                <li key={`positive-${index}`}>{item}</li>
-              ))}
-            </ul>
+          
+          {/* ✅ Section 1: Personality Summary */}
+          <div className="section">
+            <h3 style={{marginBottom: 0}}>Personality Summary</h3>
+            <div className="insights-summary">
+              <p>{insights.summary}</p>
+            </div>
           </div>
-          <div className="insights-section">
-            <h4>Areas to Improve:</h4>
-            <ul>
-              {insights.improvements.map((item, index) => (
-                <li key={`improvement-${index}`}>{item}</li>
-              ))}
-            </ul>
+
+          {/* ✅ Section 2: Graph Representation with Legend beside Pie Chart */}
+          <div className="section">
+            <h3>Personality Breakdown</h3>
+
+            <div className="chart-legend-container">
+              {/* Pie Chart */}
+              <div className="pie-chart-container">
+                <ResponsiveContainer width={300} height={250}>
+                  <PieChart>
+                    <Pie
+                      data={insights.traits}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={80}
+                      label
+                    >
+                      {insights.traits.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Legend beside Pie Chart */}
+              {/* <div className="legend-container">
+                {FIXED_TRAITS.map(trait => (
+                  <p key={trait.name} className="legend-item">
+                    <span className="legend-color" style={{ backgroundColor: trait.color }}></span>
+                    {trait.name}
+                  </p>
+                ))}
+              </div> */}
+            </div>
+
           </div>
+
         </div>
       )}
     </div>
