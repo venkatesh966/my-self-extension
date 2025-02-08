@@ -100,7 +100,8 @@ const AiInsights = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer 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`,
+          'Authorization': `Bearer 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`,
+          'HTTP-Referer': 'https://yourwebsite.com',
           'X-Title': 'My-Self Chrome Extension',
         },
         body: JSON.stringify({
