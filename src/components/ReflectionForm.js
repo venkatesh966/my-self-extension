@@ -16,6 +16,7 @@ const ReflectionForm = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [selectedTheme, setSelectedTheme] = useState('theme1'); // Default theme selection
 
+  // Load reflections and theme on initial render
   useEffect(() => {
     chrome.storage.local.get('reflections', (result) => {
       setReflections(result.reflections || []);
@@ -26,14 +27,46 @@ const ReflectionForm = () => {
     });
   }, []);
 
+  // Handle theme change
   const handleThemeChange = (theme) => {
     chrome.storage.local.set({ selectedTheme: theme }, () => {
       setSelectedTheme(theme);
     });
   };
 
+  // Handle form submission to save reflection data
   const handleSubmit = () => {
-    // Your existing submit logic here
+    // Validate if at least one field is filled
+    if (!positives.trim() && !negatives.trim() && !satisfaction) {
+      setErrorMessage('Please fill at least one field before saving.');
+      return;
+    }
+
+    // Create reflection object
+    const reflectionData = {
+      id: uuidv4(),
+      date: new Date().toISOString().slice(0, 10), // Current date in YYYY-MM-DD format
+      positives: positives.trim() ? positives.split(',') : [],
+      negatives: negatives.trim() ? negatives.split(',') : [],
+      satisfaction: satisfaction || 'Not specified',
+    };
+
+    // Update reflections array
+    const updatedReflections = [...reflections, reflectionData];
+
+    // Save reflections to chrome storage
+    chrome.storage.local.set({ reflections: updatedReflections }, () => {
+      // Update state and reset form fields
+      setReflections(updatedReflections);
+      setPositives('');
+      setNegatives('');
+      setSatisfaction('');
+      setErrorMessage('');
+      setSuccessMessage('Reflection saved successfully!');
+
+      // Reset success message after 3 seconds
+      setTimeout(() => setSuccessMessage(''), 3000);
+    });
   };
 
   return (

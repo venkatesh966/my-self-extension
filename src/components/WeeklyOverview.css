@@ -1,7 +1,7 @@
 .weekly-overview {
     padding: 20px;
     border-radius: 12px;
-    background: transparent;
+    background: cornsilk;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 650px;
     margin: auto;
@@ -19,6 +19,12 @@
     border: 1px solid #388E3C;
     border-radius: 5px;
     font-size: 14px;
+    background-color: black;
+    color: cornsilk;
+  }
+
+  .search-box::placeholder {
+    color: #d3d3d3; /* Light gray for placeholder text */
   }
   
   .reflection-list {
@@ -40,7 +46,7 @@
     flex: 1;
     padding: 10px;
     overflow: hidden;
-    cornsilk-space: nowrap;
+    white-space: nowrap;
     text-overflow: ellipsis;
   }
   
@@ -80,7 +86,7 @@
   .download-btn {
     padding: 5px;
     background: transparent;
-    color: cornsilk;
+    color: black;
     border: 2px solid cornsilk;
     border-radius: 8px;
     font-size: 12px;

@@ -93,7 +93,7 @@ textarea {
   border: 1px solid #ddd;
   border-radius: 10px;
   font-size: 16px;
-  background: transparent;
+  background: black;
   color: cornsilk;  /* Ensures the text typed is cornsilk */
   outline: none;
   transition: border-color 0.3s ease;
@@ -126,7 +126,7 @@ textarea::placeholder {
   border: 1px solid #ddd;
   border-radius: 10px;
   outline: none;
-  background: transparent;
+  background: black;
   color: cornsilk; /* Ensures the text typed in the select dropdown is cornsilk */
   transition: border-color 0.3s ease;
 }
