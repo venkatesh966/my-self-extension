@@ -41,7 +41,7 @@ const AiInsights = () => {
   };
 
   const fetchReflections = async () => {
-    if (clickCount >= 300) {
+    if (clickCount >= 15) {
       setError('Your free version is completed.');
       return;
     }
